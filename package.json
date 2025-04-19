@@ -1,0 +1,37 @@
+{
+  "name": "e2e-starter",
+  "version": "1.0.0",
+  "description": "Template repo for e2e tests using Playwright",
+  "keywords": [
+    "playwright"
+  ],
+  "homepage": "https://github.com/pfjordside/e2e-starter#readme",
+  "bugs": {
+    "url": "https://github.com/pfjordside/e2e-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pfjordside/e2e-starter.git"
+  },
+  "license": "ISC",
+  "author": "Peter Fjordside",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run e2e",
+    "e2e": "ts-node ./playwright/scripts/setup-env.ts && npx playwright test",
+    "e2e:headed": "ts-node ./playwright/scripts/setup-env.ts && npx playwright test --headed"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^1.41.0",
+    "@playwright/test": "^1.52.0",
+    "@types/figlet": "^1.7.0",
+    "@types/node": "^22.14.1",
+    "@types/prompt-sync": "^4.2.3",
+    "cross-env": "^7.0.3",
+    "figlet": "^1.8.1",
+    "prompt-sync": "^4.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
