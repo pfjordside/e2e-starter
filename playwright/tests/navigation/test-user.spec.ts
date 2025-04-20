@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { OkNavigationMenu } from '../../shared-elements/ok-nav-menu.elm';
 import { testUser } from '../../config/test-users.const';
+import { actAs } from '../../functions/act-as.fn';
 
-test.use({ storageState: `playwright/.auth/${testUser.username}.json` });
+actAs(testUser);
 
 test.describe('Test role', () => {
   let navigationMenu: OkNavigationMenu;

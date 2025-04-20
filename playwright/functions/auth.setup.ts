@@ -23,7 +23,7 @@ export async function loginUser(page: Page, user: TestUser) {
 
   // Dismiss a cookie banner, if visible
   await page
-    .waitForSelector('button#declineButton', { state: 'visible', timeout: 1000 })
+    .waitForSelector('button#declineButton', { state: 'visible', timeout: 5000 })
     .then(async el => {
       await el.click();
     })

@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { OkNavigationMenu } from '../../shared-elements/ok-nav-menu.elm';
 import { admin } from '../../config/test-users.const';
+import { actAs } from '../../functions/act-as.fn';
 
-test.use({ storageState: `playwright/.auth/${admin.username}.json` });
+actAs(admin); // Use the actAs function to set the storage state for the admin user
 
 test.describe('Superuser role', () => {
   let navigationMenu: OkNavigationMenu;
