@@ -19,6 +19,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run e2e",
+    "test:ui": "npx playwright test --ui",
     "e2e": "ts-node ./playwright/scripts/setup-env.ts && npx playwright test",
     "e2e:headed": "ts-node ./playwright/scripts/setup-env.ts && npx playwright test --headed"
   },

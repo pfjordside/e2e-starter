@@ -1,15 +1,18 @@
 import * as dotenv from '@dotenvx/dotenvx';
 import { Page, test } from '@playwright/test';
 import { TestUser } from '../models/test-user.interface';
-import { admin, testUser } from '../config/test-users.const';
+import { admin, testUser, testUsers } from '../config/test-users.const';
 dotenv.config();
 
-test('authenticate as test user', async ({ page }) => {
-  await loginUser(page, testUser);
-});
-
-test('authenticate as admin', async ({ page }) => {
-  await loginUser(page, admin);
+test('Authenticate test users', async ({ page }) => {
+  for (const user of testUsers) {
+    await loginUser(page, user);
+    await page.context().clearCookies();
+    await page.evaluate(() => {
+      localStorage.clear();
+      sessionStorage.clear();
+    });
+  }
 });
 
 export async function loginUser(page: Page, user: TestUser) {

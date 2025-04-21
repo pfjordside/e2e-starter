@@ -1,12 +1,12 @@
 import { TestUser } from '../models/test-user.interface';
 
 export const testUser: TestUser = {
-  username: 'pkc',
+  username: 'testUser',
   password: 'TEST_USER_PASSWORD',
 };
 
 export const admin: TestUser = {
-  username: 'emsp_superuser',
+  username: 'admin',
   password: 'ADMIN_PASSWORD',
 };
 
