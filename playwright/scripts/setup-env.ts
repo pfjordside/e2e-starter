@@ -11,7 +11,7 @@ const safePasswordPageLink = 'https://okamba.atlassian.net/wiki/spaces/Dev/pages
 
 const prompt = promptSync();
 
-const art = figlet.textSync('OK E2E', {
+const greeting = figlet.textSync('OK E2E', {
   font: '3D-ASCII',
 });
 
@@ -32,7 +32,9 @@ function promptUserPassword(user: TestUser): void {
 
 function promptBaseUrl(): void {
   if (!process.env.BASE_URL) {
-    const value = prompt('Please enter the base url you will be testing: 👇\neg. \x1b[34mhttp://localhost:4200\x1b[0m or \x1b[34mhttps://some-app.test.ok.dk\x1b[0m \n');
+    const value = prompt(
+      'Please enter the url you will be testing: 👇\neg. \x1b[34mhttp://localhost:4200\x1b[0m or \x1b[34mhttps://some-app.test.ok.dk\x1b[0m \n'
+    );
     if (value) {
       const envFilePath = path.resolve(__dirname, '../../.env');
       fs.appendFileSync(envFilePath, `BASE_URL=${value}\n`, 'utf-8');
@@ -44,21 +46,16 @@ function promptBaseUrl(): void {
 }
 
 // Greet the dev with some ASCII art
-console.log(art);
+console.log(greeting);
 
 // Prompt for the base URL
 promptBaseUrl();
 
 // Log a link to the safe password page
-console.log(
-  'Setup passwords for the e2e test users',
-  '\n',
-  `Find the passwords here 👉 \x1b[34m${safePasswordPageLink}\x1b[0m`,
-  '\n'
-);
+console.log('Setup passwords for the e2e test users', '\n', `Find the passwords here 👉 \x1b[34m${safePasswordPageLink}\x1b[0m`, '\n');
 
 // Dynamically prompt for passwords of all test users
-testUsers.forEach((user) => {
+testUsers.forEach(user => {
   promptUserPassword(user);
 });
 

@@ -26,7 +26,10 @@ export async function loginUser(page: Page, user: TestUser) {
 
   // Dismiss a cookie banner, if visible
   await page
-    .waitForSelector('button#declineButton', { state: 'visible', timeout: 5000 })
+    .waitForSelector('button#declineButton', {
+      state: 'visible',
+      timeout: 5000,
+    })
     .then(async el => {
       await el.click();
     })
@@ -38,7 +41,10 @@ export async function loginUser(page: Page, user: TestUser) {
 
   await page.waitForLoadState('domcontentloaded');
   await page.waitForSelector('nav', { state: 'visible', timeout: 10000 });
-  await page.waitForSelector('text=Log ud', { state: 'visible', timeout: 10000 });
+  await page.waitForSelector('text=Log ud', {
+    state: 'visible',
+    timeout: 10000,
+  });
 
   // Save cookies state
   await page.context().storageState({
