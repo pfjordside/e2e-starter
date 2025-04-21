@@ -24,4 +24,9 @@ test.describe('Navigation Menu Tests', () => {
   test('navigation items are visible', async () => {
     await expect(navigationMenu.navItem.first()).toBeVisible();
   });
+
+  test('sub navigation items are visible', async () => {
+    await navigationMenu.navItem.first().click();
+    await expect(navigationMenu.navItem.first().locator('a')).toBeVisible();
+  });
 });
