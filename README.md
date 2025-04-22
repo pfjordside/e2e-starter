@@ -1,6 +1,7 @@
 # e2e-starter
 
-Template repo for e2e tests using Playwright
+Template repo for e2e tests using Playwright  
+Have a look at the [playwright documentation](https://playwright.dev/docs/intro) for more information.
 
 ## Getting Started
 
@@ -42,10 +43,16 @@ This will:
 1. Prompt you to set up the base URL and test user passwords if not already configured.
 2. Execute the Playwright tests.
 
-To run the tests in headed mode (with a browser UI), use:
+To run the tests in headed mode (view test run in browser), use:
 
 ```bash
-npm run e2e:headed
+npm run test:headed
+```
+
+To debug the tests in ui mode (step through test execution), use:
+
+```bash
+npm run test:ui
 ```
 
 ### Additional Information
