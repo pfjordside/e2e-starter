@@ -1,0 +1,59 @@
+name: Run Playwright Test
+
+trigger: none
+
+resources:
+  pipelines:
+    - pipeline: [Pipeline name here]
+      source: [Repo name here]
+      trigger:
+        branches:
+          include:
+            - 'main'
+
+parameters:
+  - name: BASE_URL
+    displayName: 'Base URL'
+    type: string
+    default: 'https://ok.dk' # Default value, can be overridden when running the pipeline
+
+variables:
+  BASE_URL: ${{ parameters.BASE_URL }}
+
+jobs:
+  - job:
+    displayName: 'Run Playwright Test'
+    pool:
+      name: Prod Linux VMSS
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '22.x'
+        displayName: 'Use Node v22'
+
+      - task: Npm@1
+        displayName: 'Install dependencies'
+        inputs:
+          command: 'install'
+          customRegistry: 'useFeed'
+          customFeed: '43e14af3-e6d9-4b86-80f1-00f4740e426d'
+
+      - script: npx playwright install
+        displayName: 'Ensure test browsers are installed'
+
+      - script: touch .env
+        displayName: 'Create empty .env file'
+
+      - script: npx cross-env BASE_URL=${{ variables.BASE_URL }} TEST_USER_PASSWORD=$(TEST_USER_PASSWORD) ADMIN_PASSWORD=$(ADMIN_PASSWORD) CI=true npx playwright test --project=test
+        displayName: Run Playwright Tests
+
+      - task: PublishTestResults@2
+        inputs:
+          searchFolder: test-results
+          testRunTitle: 'Playwright Tests'
+          testResultsFiles: '**/test-results.xml'
+          testResultsFormat: JUnit
+          failTaskOnFailedTests: true
