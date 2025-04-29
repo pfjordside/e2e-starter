@@ -11,7 +11,7 @@ Have a look at the [playwright documentation](https://playwright.dev/docs/intro)
 
    ```bash
    npm install
-   npx install playwright
+   npx playwright install
    ```
 
 2. **Define test users**:
